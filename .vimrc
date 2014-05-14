@@ -1,4 +1,4 @@
-"https://github.com/toorsoo/_myvim 
+"https://github.com/toorsoo/dotfiles
 "---------------------------------
 "TODO: 
 " - NeobundleInstall
@@ -19,7 +19,6 @@ if has('multi_byte_ime') || has('xim')
 highlight Cursor guifg=NONE guibg=White
 highlight CursorIM guifg=NONE guibg=DarkRed
 endif
-
 
 "help関連 ---------------------------------------------------
 set helplang=ja,en
@@ -90,6 +89,14 @@ autocmd FileType ctp setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType twig setlocal omnifunc=htmlcomplete#CompleteTags
 "autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 augroup END
+
+" 単語を新規タブを開いて検索
+function! TabGrep(keyword)
+    tabedit
+    execute 'vimgrep /'.a:keyword.'/ **/*.*'
+endfunction
+command! -nargs=* Grep :call TabGrep(<f-args>)
+nnoremap <space>tg yiw:Grep <c-r><c-w><cr>
 
 "-----------------------------------------------------------------------------
 "mapはここに
@@ -199,9 +206,6 @@ noremap np aにゃんぱすー<esc>
 "highlight ZenkakuSpace ctermbg=lightblue guibg=white
 "match ZenkakuSpace /　/ 
 
-"highlight Todo ctermbg=4 ctermfg=1 guibg=8
-"match Todo /TODO/ 
-
 "検索 -----------------------------------------------
 set ignorecase  "小文字検索で大文字もヒットさせる
 set smartcase   "大文字も含めた検索の場合はその通りに検索を行う
@@ -286,16 +290,6 @@ nnoremap <silent><leader>o gdD^y$u<C-o><C-o><esc>
 inoremap <c-x> <esc>bi$<esc>ea
 nnoremap <space>vd Ivar_dump();<esc>==f(
 
-"あとで消す
-"httpd関連 ちょっと仮導入 ***********************************
-nnoremap <space>hts :! sudo /etc/init.d/httpd stop<cr>
-nnoremap <space>htstart :! sudo /etc/init.d/httpd start<cr>
-nnoremap <space>htrestart :! sudo /etc/init.d/httpd restart<cr>
-
-nnoremap <F2> :! sudo /etc/init.d/httpd restart<cr>
-nnoremap <F3> :! sudo /etc/init.d/httpd stop<cr>
-nnoremap <F4> :! sudo /etc/init.d/httpd start<cr>
-
 "括弧入れた後に移動とか
 inoremap <c-l> <esc>ea
 "括弧内のテキストにスペースを入れる
@@ -319,9 +313,6 @@ map <leader>c <Plug>(operator-camelize)
 map <leader>C <Plug>(operator-decamelize))
 
 vnoremap <leader>fi dafor(var i in <esc>p){}h
-
-
-
 
 function! CSVH(x)
     execute 'match Keyword /^\([^, ]*, \)\{'.a:x.'}\zs[^, ]*/'
@@ -413,22 +404,6 @@ if filereadable(expand('~/nodetest/unixtime_to_time.js'))
     "UnixTime表示 ON/OFF
     nnoremap <silent><space>ut :call DisplayDateFromUnixtime()<cr>
 endif
-
-
-" スコープ確認用Windowを表示させる(仮)
-nnoremap <c-w><space> yy:sp @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@<cr><c-w>100-p<c-w>w
-
-" grep結果を新たなTABで表示
-function! TabGrep(keyword)
-    tabedit
-    execute 'vimgrep /'.a:keyword.'/ **/*.*'
-endfunction
-
-command! -nargs=* Grep :call TabGrep(<f-args>)
-" Grepショートカット
-" TODO:
-" コマンドラインウィンドウへのカーソル上の単語貼り付け、もっとスマートな方法はないか
-nnoremap <space>tg yiw:Grep <c-r><c-w><cr>
 
 "lightline関連 ------------------------------------------------------
 command! Tail :!%tail -fn 1000 %<cr>
@@ -522,7 +497,6 @@ if filereadable(expand('~/.tags'))
 endif
 
 " vimsound
-
 "let s:se_path = "~/vimsound/wav/"
 "let s:se_ext = ".wav"
 "function! s:change_sound_name(base_name)
