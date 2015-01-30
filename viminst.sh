@@ -11,3 +11,6 @@ cat patch/7.4.* | patch -p0
 ./configure
 make
 make install
+cd ~/
+mkdir -p ~.vim/bundle
+git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
