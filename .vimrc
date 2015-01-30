@@ -1,24 +1,55 @@
 "https://github.com/toorsoo/dotfiles
-"---------------------------------
-"TODO: 
-" - NeobundleInstall
-"   - 会社の環境だとなんかできない <- 原因調査の時間がとれない <- 
-"---------------------------------
 
-if &t_Co > 2 || has("gui_running")
-    syntax on
-    set hlsearch
-endif
-filetype plugin on
-if &term=="xterm"
-    set t_Co=256
-    set t_Sf=[3%dm
+" NeoBundle -----------------------------------------------------===
+" Note: Skip initialization for vim-tiny or vim-small.
+if !1 | finish | endif
+
+if has('vim_starting')
+if &compatible
+set nocompatible               " Be iMproved
 endif
 
-if has('multi_byte_ime') || has('xim') 
-highlight Cursor guifg=NONE guibg=White
-highlight CursorIM guifg=NONE guibg=DarkRed
+" Required:
+set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
+
+" Required:
+call neobundle#begin(expand('~/.vim/bundle/'))
+
+" Let NeoBundle manage NeoBundle
+" Required:
+
+" プラグインを列挙
+"-------------------------------------------------------
+
+NeoBundleFetch 'Shougo/neobundle.vim'
+NeoBundle 'Shougo/vimproc.vim'
+NeoBundle 'Shougo/unite.vim'
+"NeoBundle 'Shougo/neocomplete.vim' 
+NeoBundle 'Shougo/vimshell.vim'
+NeoBundle 'Shougo/vimfiler.vim'
+NeoBundle 'itchyny/lightline.vim'
+NeoBundle 't9md/vim-textmanip'
+NeoBundle 'ujihisa/unite-colorscheme'
+
+"color== == == == == == == ==
+NeoBundle 'altercation/vim-colors-solarized'
+
+
+" My Bundles here:
+" Refer to |:NeoBundle-examples|.
+" Note: You don't set neobundle setting in .gvimrc!
+
+call neobundle#end()
+    " Required:
+    filetype plugin indent on
+
+" If there are uninstalled bundles found on startup, 
+" this will conveniently prompt you to install them.
+NeoBundleCheck
+" NeoBundle -----------------------------------------------------===
+
+
 
 "help関連 ---------------------------------------------------
 set helplang=ja,en
@@ -77,7 +108,11 @@ let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_smart_case = 1
 "表示する候補の数
 let g:neocomplcache_max_list = 24
-let g:neocomplcache_enable_camel_case_completion = 0
+"let g:neocomplcache_enable_camel_case_completion = 0
+"
+" plugin関連: TODO: プラグインがインストールされていれば有効みたいにできないか？
+"inoremap <expr><C-n> neocomplcache#manual_keyword_complete()
+"inoremap <expr><CR> neocomplcache#smart_close_popup() . "\<CR>"
 
 "オムニ補完
 augroup SetOmniCompletionSetting
@@ -178,9 +213,6 @@ nnoremap <silent> <space>yp :let @" = expand("%:p")<cr>:echo @"<cr>
 nnoremap <silent> <space>ep :e <C-r>"<cr>:echo "Opened the file from yank register."<cr>
 "yankレジスタの内容と, カーソル上の単語を入れ替え
 nnoremap <silent> <space>p :let @z=@"<cr>diwh"zp:let @"=@z<cr>
-" plugin関連
-inoremap <expr><C-n> neocomplcache#manual_keyword_complete()
-inoremap <expr><CR> neocomplcache#smart_close_popup() . "\<CR>"
 "tabで補完候補の選択を行う
 inoremap <expr><TAB> pumvisible() ? "\<Down>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<Up>" : "\<S-TAB>"
@@ -477,7 +509,7 @@ set background=dark
 let g:solarized_termcolors=256
 let g:solarized_degrade=1
 "colorscheme solarized
-colorscheme molokai
+colorscheme koehler
 
 "入力待ち時間を短縮
 set timeout timeoutlen=250 ttimeoutlen=25
