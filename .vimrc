@@ -34,6 +34,12 @@ NeoBundle 'ujihisa/unite-colorscheme'
 
 "color== == == == == == == ==
 NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'jeffreyiacono/vim-colors-wombat'
+NeoBundle 'jpo/vim-railscasts-theme'
+NeoBundle 'croaker/mustang-vim'
+NeoBundle 'vim-scripts/Zenburn'
+NeoBundle 'vim-scripts/Lucius'
+NeoBundle 'tomasr/molokai'
 
 
 " My Bundles here:
