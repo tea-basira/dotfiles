@@ -1,0 +1,9 @@
+[core]
+    editor = vim
+    # Unicode
+    precomposeunicode = true
+    quotepath = true
+[user]
+    name = toorsoo
+    email = tyabatyaba.koutya@gmail.com
+
