@@ -25,6 +25,7 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/vimproc.vim'
 NeoBundle 'Shougo/unite.vim'
+"Lua含んだvimじゃないと動かないっぽい？
 "NeoBundle 'Shougo/neocomplete.vim' 
 NeoBundle 'Shougo/vimshell.vim'
 NeoBundle 'Shougo/vimfiler.vim'
@@ -107,6 +108,10 @@ set expandtab
 set ts=4
 set autoindent
 set shiftwidth=4
+
+"ColorScheme --------------------------------------------------
+colorscheme molokai
+"colorscheme solarized
 
 "ねおこん 起動
 let g:neocomplcache_enable_at_startup = 1
@@ -365,13 +370,6 @@ nnoremap <c-q> :tabe<cr>:VimFilerCurrentDir<cr>
 " ( から : までの間にある文字列をパス, : 以降にある最初の数値が行数として 新しいタブで開く
 nnoremap <space>tgf "fyylT("pyt:t:<c-a><c-x>"lyiw:tabe! <c-r>p<cr>:<c-r>l<esc>:echo "<c-r>f"<cr>
 
-"COLOR
-"TODO: 環境によって変えたい
-"LINUX
-"WINDOWS
-colorscheme default
-"WINDOWS
-"
 " 処理の関数化テスト
 " w: (ウィンドウにローカルな変数)
 " g: (タブ変数)
@@ -447,7 +445,7 @@ endif
 command! Tail :!%tail -fn 1000 %<cr>
 set laststatus=2 
 set t_Co=256
-colorscheme peachpuff
+
 let g:lightline = {
 \ 'colorscheme': 'landscape', 
 \ 'mode_map': {'c': 'NORMAL'}, 
@@ -514,8 +512,6 @@ syntax enable
 set background=dark
 let g:solarized_termcolors=256
 let g:solarized_degrade=1
-"colorscheme solarized
-colorscheme koehler
 
 "入力待ち時間を短縮
 set timeout timeoutlen=250 ttimeoutlen=25
