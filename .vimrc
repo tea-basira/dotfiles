@@ -32,6 +32,8 @@ NeoBundle 'Shougo/vimfiler.vim'
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 't9md/vim-textmanip'
 NeoBundle 'ujihisa/unite-colorscheme'
+NeoBundle 'Yggdroot/indentLine' "インデントをわかりやすく
+NeoBundle 'tpope/vim-surround' " Textobject強化
 
 "color== == == == == == == ==
 NeoBundle 'altercation/vim-colors-solarized'
@@ -55,8 +57,6 @@ call neobundle#end()
 " this will conveniently prompt you to install them.
 NeoBundleCheck
 " NeoBundle -----------------------------------------------------===
-
-
 
 "help関連 ---------------------------------------------------
 set helplang=ja,en
@@ -113,14 +113,18 @@ set shiftwidth=4
 colorscheme molokai
 "colorscheme solarized
 
-"ねおこん 起動
+"Neocomplcache
 let g:neocomplcache_enable_at_startup = 1
 "大文字が入力されるまで大文字小文字の区別を無視する
 let g:neocomplcache_enable_smart_case = 1
 "表示する候補の数
 let g:neocomplcache_max_list = 24
 "let g:neocomplcache_enable_camel_case_completion = 0
-"
+
+"Yggdroot/indentLine
+let g:indentLine_faster = 1
+nmap <silent><Leader>i :<C-u>IndentLinesToggle<CR>
+
 " plugin関連: TODO: プラグインがインストールされていれば有効みたいにできないか？
 "inoremap <expr><C-n> neocomplcache#manual_keyword_complete()
 "inoremap <expr><CR> neocomplcache#smart_close_popup() . "\<CR>"
