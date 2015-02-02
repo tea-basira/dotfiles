@@ -33,7 +33,8 @@ NeoBundle 'itchyny/lightline.vim'
 NeoBundle 't9md/vim-textmanip'
 NeoBundle 'ujihisa/unite-colorscheme'
 NeoBundle 'Yggdroot/indentLine' "インデントをわかりやすく
-NeoBundle 'tpope/vim-surround' " Textobject強化
+NeoBundle 'tpope/vim-surround' "Textobject強化
+NeoBundle 'terryma/vim-multiple-cursors' "複数行の挿入をわかりやすく
 
 "color== == == == == == == ==
 NeoBundle 'altercation/vim-colors-solarized'
