@@ -1,6 +1,7 @@
 #!/bin/sh
-ln -s ~/work/dotfiles/.zshrc ~/.zshrc
-ln -s ~/work/dotfiles/.bashrc ~/.bashrc
-ln -s ~/work/dotfiles/.vimrc ~/.vimrc
-ln -s ~/work/dotfiles/.tmux.conf ~/.tmux.conf
-ln -s ~/work/dotfiles/.gitconfig ~/.gitconfig
+DIR='~/work/dotfiles'
+ln -s $putlink_path/.zshrc ~/.zshrc
+ln -s $putlink_path/.bashrc ~/.bashrc
+ln -s $putlink_path/.vimrc ~/.vimrc
+ln -s $putlink_path/.tmux.conf ~/.tmux.conf
+ln -s $putlink_path/.gitconfig ~/.gitconfig
