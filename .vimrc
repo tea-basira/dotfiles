@@ -246,9 +246,6 @@ vnoremap <C-k> 3k
 nnoremap <C-j> 3j
 nnoremap <C-k> 3k
 
-"にやんぱす
-noremap np aにゃんぱすー<esc>
-
 "ハイライト
 "全角スペース
 "highlight ZenkakuSpace ctermbg=lightblue guibg=white
