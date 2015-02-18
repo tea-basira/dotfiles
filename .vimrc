@@ -74,6 +74,11 @@ set guioptions-=T
 "メニュー削除
 set guioptions-=m
 
+"GVim フルスクリーンモード使用
+nnoremap <f11> :ScreenMode 6<cr>"
+""GVim フルスクリーンモード解除 <- 暫定F11のみで切り替えしたい 
+nnoremap <f10> :ScreenMode 0<cr>"
+
 "<leader>変更
 let mapleader =","
 
