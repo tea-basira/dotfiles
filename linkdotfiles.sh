@@ -1,7 +1,9 @@
 #!/bin/sh
-DIR='~/work/dotfiles'
-ln -s $putlink_path/.zshrc ~/.zshrc
-ln -s $putlink_path/.bashrc ~/.bashrc
-ln -s $putlink_path/.vimrc ~/.vimrc
-ln -s $putlink_path/.tmux.conf ~/.tmux.conf
-ln -s $putlink_path/.gitconfig ~/.gitconfig
+#以下クローンした場所によって書き換える
+#toorsoo
+linkPath='/home/toorsoo/work/dotfiles'
+ln -s $linkPath/.zshrc ~/.zshrc
+ln -s $linkPath/.bashrc ~/.bashrc
+ln -s $linkPath/.vimrc ~/.vimrc
+ln -s $linkPath/.tmux.conf ~/.tmux.conf
+ln -s $linkPath/.gitconfig ~/.gitconfig
