@@ -139,4 +139,21 @@ fi
 ll
 
 
+#nodeインストール時の変更
+#nvm と指定されたバージョンの Node.js がインストール済みの場合だけ
+#設定を有効にする
+if [[ -f ~/.nvm/nvm.sh ]]; then
+    source ~/.nvm/nvm.sh
+    wait
+    which nvm -v >/dev/null 2>&1
+    if [ $? -eq 0 ] ; then
+        _nodejs_use_version="v0.12.2"
+        if nvm ls | grep -F -e "${_nodejs_use_version}" >/dev/null 2>&1 ;then
+            nvm use "${_nodejs_use_version}" >/dev/null
+            export NODE_PATH=${NVM_PATH}_modules${NODE_PATH:+:}${NODE_PATH}
+        fi
+        unset _nodejs_use_version
+    fi
+fi
+
 
