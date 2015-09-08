@@ -1,5 +1,7 @@
 "https://github.com/toorsoo/dotfiles
-
+"---------------------------------------------------------------------------------------S
+"PLUGIN
+"---------------------------------------------------------------------------------------S
 " NeoBundle -----------------------------------------------------===
 " Note: Skip initialization for vim-tiny or vim-small.
 if !1 | finish | endif
@@ -9,7 +11,7 @@ if &compatible
 set nocompatible               " Be iMproved
 endif
 
-" Required:
+"Required:
 set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
@@ -19,9 +21,10 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 " Let NeoBundle manage NeoBundle
 " Required:
 
-" プラグインを列挙
-"-------------------------------------------------------
 
+"-------------------------------------------------------
+" Neobundleでインストールするプラグインを列挙
+"-------------------------------------------------------
 NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/vimproc.vim'
 NeoBundle 'Shougo/unite.vim'
@@ -59,6 +62,30 @@ call neobundle#end()
 NeoBundleCheck
 " NeoBundle -----------------------------------------------------===
 
+
+"Neocomplcache
+let g:neocomplcache_enable_at_startup = 1
+"大文字が入力されるまで大文字小文字の区別を無視する
+let g:neocomplcache_enable_smart_case = 1
+"表示する候補の数
+let g:neocomplcache_max_list = 24
+"let g:neocomplcache_enable_camel_case_completion = 0
+
+"Yggdroot/indentLine
+let g:indentLine_faster = 1
+nmap <silent><Leader>i :<C-u>IndentLinesToggle<CR>
+
+" plugin関連: TODO: プラグインがインストールされていれば有効みたいにしたい
+"inoremap <expr><C-n> neocomplcache#manual_keyword_complete()
+"inoremap <expr><CR> neocomplcache#smart_close_popup() . "\<CR>"
+
+"PLUGIN=== == == == == == == == == == == == == == == == == == == == == == == == == == ==E
+
+
+
+"---------------------------------------------------------------------------------------S
+"SYSTEM
+"---------------------------------------------------------------------------------------S
 "help関連 ---------------------------------------------------
 set helplang=ja,en
 if filereadable(expand('~/.vim/vimdoc-ja/doc/'))
@@ -115,26 +142,25 @@ set ts=4
 set autoindent
 set shiftwidth=4
 
+"検索 -----------------------------------------------
+set ignorecase  "小文字検索で大文字もヒットさせる
+set smartcase   "大文字も含めた検索の場合はその通りに検索を行う
+
+"IME系
+"set noimdisabe "INSERTモードから抜けた際に自動でIME入力をOFFにする
+"inoremap <silent> <esc> <esc>:set iminsert=0<cr>
+"
+"
 "ColorScheme --------------------------------------------------
 colorscheme molokai
+syntax enable
+
+"solarized使用時↓== 
+set background=dark
+let g:solarized_termcolors=256
+let g:solarized_degrade=1
+
 "colorscheme solarized
-
-"Neocomplcache
-let g:neocomplcache_enable_at_startup = 1
-"大文字が入力されるまで大文字小文字の区別を無視する
-let g:neocomplcache_enable_smart_case = 1
-"表示する候補の数
-let g:neocomplcache_max_list = 24
-"let g:neocomplcache_enable_camel_case_completion = 0
-
-"Yggdroot/indentLine
-let g:indentLine_faster = 1
-nmap <silent><Leader>i :<C-u>IndentLinesToggle<CR>
-
-" plugin関連: TODO: プラグインがインストールされていれば有効みたいにできないか？
-"inoremap <expr><C-n> neocomplcache#manual_keyword_complete()
-"inoremap <expr><CR> neocomplcache#smart_close_popup() . "\<CR>"
-
 "オムニ補完
 augroup SetOmniCompletionSetting
 autocmd!
@@ -154,8 +180,22 @@ endfunction
 command! -nargs=* Grep :call TabGrep(<f-args>)
 nnoremap <space>tg yiw:Grep <c-r><c-w><cr>
 
+"quickfix 自動表示-----------------------------------------------
+function! OpenModifiableQF()
+cw
+set modifiable
+set nowrap
+endfunction
+autocmd QuickfixCmdPost vimgrep call OpenModifiableQF()
+
+"Scroll開始行 ---------------------------------------------------
+set scrolloff=4
+
+"---------------------------------------------------------------------------------------S
+"キー操作 機能拡張
+"---------------------------------------------------------------------------------------S
 "-----------------------------------------------------------------------------
-"mapはここに
+"基本コマンドの拡張
 "-----------------------------------------------------------------------------
 "vimrc編集関連 --------------------------------------------------------
 nnoremap <silent> <space>tv :tabe $MYVIMRC<cr>:echo "edit my vimrc"<cr>
@@ -256,25 +296,8 @@ nnoremap <C-k> 3k
 "highlight ZenkakuSpace ctermbg=lightblue guibg=white
 "match ZenkakuSpace /　/ 
 
-"検索 -----------------------------------------------
-set ignorecase  "小文字検索で大文字もヒットさせる
-set smartcase   "大文字も含めた検索の場合はその通りに検索を行う
-
-"IME系
-"set noimdisabe "INSERTモードから抜けた際に自動でIME入力をOFFにする
-"inoremap <silent> <esc> <esc>:set iminsert=0<cr>
 
 
-"quickfix 自動表示-----------------------------------------------
-function! OpenModifiableQF()
-cw
-set modifiable
-set nowrap
-endfunction
-autocmd QuickfixCmdPost vimgrep call OpenModifiableQF()
-
-"scroll開始行
-set scrolloff=4
 "カレントファイル関連 ---------------------------------------
 "現在のファイルをそのまま読み直す
 nnoremap <silent> <space>rr :e %<cr>
@@ -377,6 +400,12 @@ nnoremap <c-q> :tabe<cr>:VimFilerCurrentDir<cr>
 " ( から : までの間にある文字列をパス, : 以降にある最初の数値が行数として 新しいタブで開く
 nnoremap <space>tgf "fyylT("pyt:t:<c-a><c-x>"lyiw:tabe! <c-r>p<cr>:<c-r>l<esc>:echo "<c-r>f"<cr>
 
+
+
+
+" -----------------------------------------------------------------------------------------
+" テスト
+"
 " 処理の関数化テスト
 " w: (ウィンドウにローカルな変数)
 " g: (タブ変数)
@@ -448,6 +477,8 @@ if filereadable(expand('~/nodetest/unixtime_to_time.js'))
     nnoremap <silent><space>ut :call DisplayDateFromUnixtime()<cr>
 endif
 
+
+
 "lightline関連 ------------------------------------------------------
 command! Tail :!%tail -fn 1000 %<cr>
 set laststatus=2 
@@ -514,11 +545,6 @@ function! MyMode()
     return winwidth(0) > 60 ? lightline#mode() : ''
 endfunction')')')')')
 "----------------------------------------------------------------
-
-syntax enable
-set background=dark
-let g:solarized_termcolors=256
-let g:solarized_degrade=1
 
 "入力待ち時間を短縮
 set timeout timeoutlen=250 ttimeoutlen=25
