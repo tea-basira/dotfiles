@@ -1,22 +1,25 @@
-dotfiles.
-設定ファイル + rootへのリンク作成バッチファイル.
+**++. files++**
+-
+ - 初期インストール用shell
+  - 各種設定ファイル
 
-https://github.com/toorsoo/dotfiles
+---
+動作確認環境 
+- CentOS6.x,  7.x
 
-■設定ファイルの配置
+Ubuntu,  Mac OS X 上でも一応確認済みなものの、
+最近触ってないので怪しい
 
-① dotfilesを配置したディレクトリに合わせてlinkdotfiles.shの内容を書き換える
+**`linkdotfiles.sh`**
+ホームディレクトリに設定ファイルのシンボリックリンクを作成
+叩く前にホームディレクトリの書き変えが必要
 
-② linkdotfiles.sh を叩く
-
-
-■Vim最新版のインストール
-
-①viminst.shを叩く
-
-
-■VimPluginを導入する前の準備
-
-①neobundleinst.shを叩く
+**`viminst.sh`**
+Vimをインストール
+一緒にNeobundleのインストールも行う
+ 
+**`neobuindleinst.sh`**
+Neobundleをインストールする。
+既にVimがインストールされた環境向け
 
 
